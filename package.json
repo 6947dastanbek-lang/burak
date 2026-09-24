@@ -10,9 +10,11 @@
         "start": "ts-node src/server.ts",
         "start:dev": "nodemon --exec ts-node src/server.ts",
         "build": "tsc",
+        "train": "nodemon --exec ts-node src/train.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
+        "dotenv": "^16.0.0",
         "moment": "^2.31.0"
     },
     "devDependencies": {
