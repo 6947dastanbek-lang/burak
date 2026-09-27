@@ -10,6 +10,7 @@ import mongoose from "mongoose";
 import app from "./app";
 // ./app → app.ts faylidan app obyektini olib keladi
 
+//TCP // Schema
 mongoose
     .connect(process.env.MONGO_URL as string, {})
     // as string → TypeScript'ga "bu qiymat string" deb aytyapmiz
@@ -25,7 +26,6 @@ mongoose
             // function() → server ishga tushgandan keyin bajariladi
 
             console.log(`The server is running successfully on port: ${PORT}`);
-            // server muvaffaqiyatli ishga tushganini ko‘rsatadi
         });
     })
 
