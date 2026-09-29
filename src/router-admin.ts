@@ -10,10 +10,18 @@ import restaurantController from "./controllers/restaurant.controller";
 routerAdmin.get("/", restaurantController.goHome);
 // GET "/" → restaurantController.goHome ishlaydi
 
-routerAdmin.get("/login", restaurantController.getLogin);
+routerAdmin
+    .get("/login", restaurantController.getLogin)
+    .post("/login", restaurantController.processLogin);
 // GET "/login" → restaurantController.getLogin ishlaydi
 
-routerAdmin.get("/signup", restaurantController.getSignup);
+// ENG MUHIM:
+// GET /login → login sahifasini ko‘rsatadi
+// POST /loginProcess → login ma'lumotlarini QABUL QILIB, qayta ishlaydi
+
+routerAdmin
+    .get("/signup", restaurantController.getSignup)
+    .post("/signup", restaurantController.processSignup);
 // GET "/signup" → restaurantController.getSignup ishlaydi
 
 export default routerAdmin;
