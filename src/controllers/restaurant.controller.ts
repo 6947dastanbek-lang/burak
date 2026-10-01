@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { T } from "../libs/types/common";
 
-import { MemberInput } from "../libs/types/member";
+import { MemberInput, LoginInput } from "../libs/types/member";
 // MemberInput → signup paytida keladigan member ma'lumotlari
 
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
@@ -55,17 +55,20 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     }
 };
 
-restaurantController.processLogin = (req: Request, res: Response) => {
-    // processLogin → login qilish uchun kelgan POST requestni qabul qiladi
-
+restaurantController.processLogin = async (req: Request, res: Response) => {
     try {
-        console.log("processLogin");
+        console.log("body:", req.body);
 
-        res.send("DONE");
-        // hozircha login logic yozilmagan
-        // shuning uchun faqat DONE yuboryapmiz
+        const input: LoginInput = req.body;
+
+        const memberService = new MemberService();
+
+        const result = await memberService.processLogin(input);
+
+        res.send(result);
     } catch (err) {
         console.log("Error, processLogin:", err);
+        res.send(err);
     }
 };
 
@@ -82,13 +85,10 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
         const newMember: MemberInput = req.body;
         // req.body'dagi ma'lumotlarni newMember'ga olamiz
         // MemberInput → ma'lumotlarning TypeScript structure'i
-
         newMember.memberType = MemberType.RESTAURANT;
         // signup qilayotgan memberning turini RESTAURANT qilib belgilaymiz
-
         newMember.memberStatus = MemberStatus.ACTIVE;
         // yangi memberning statusini ACTIVE qilib belgilaymiz
-
         const memberService = new MemberService();
         // MemberService objectini yaratamiz
         // database bilan ishlashni Service'ga topshiramiz
@@ -97,7 +97,6 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
         // Service'ga newMember yuboramiz
         // Service MongoDB'ga yangi member yaratadi
         // result → database'dan qaytgan yangi member
-
         res.send(result);
         // result'ni client/Postman'ga qaytaramiz
     } catch (err) {
@@ -105,6 +104,5 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
         // signup vaqtida xato chiqsa terminalga chiqaramiz
     }
 };
-
 export default restaurantController;
 // boshqa fayllarda restaurantController'dan foydalanish uchun export qilamiz
