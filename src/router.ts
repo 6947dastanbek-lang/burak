@@ -10,4 +10,10 @@ const router = express.Router();
 import memberController from "./controllers/member.controller";
 // memberController → member.controller.ts faylidan controller'ni olib kelamiz
 
+
+
+router.post("/login", memberController.login);
+router.post("/signup", memberController.signup);
+
+
 export default router;

@@ -64,7 +64,7 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
         const memberService = new MemberService();
 
         const result = await memberService.processLogin(input);
-
+        // TODO:SESSIONS AUTHENTICATION 🛑
         res.send(result);
     } catch (err) {
         console.log("Error, processLogin:", err);
@@ -94,9 +94,11 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
         // database bilan ishlashni Service'ga topshiramiz
 
         const result = await memberService.processSignup(newMember);
-        // Service'ga newMember yuboramiz
+        // Service'MODELga newMember yuboramiz
         // Service MongoDB'ga yangi member yaratadi
         // result → database'dan qaytgan yangi member
+
+        // TODO:SESSIONS AUTHENTICATION🛑
         res.send(result);
         // result'ni client/Postman'ga qaytaramiz
     } catch (err) {

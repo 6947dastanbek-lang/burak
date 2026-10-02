@@ -9,7 +9,11 @@
  *      css → SNAKE =>
  * - Error handling =>
  */
-
+/*
+Traditional API => BSSR  (ADMIN)=> EJS
+Rest API => SPA => REACT (USER'S application)
+ GrapQL API =>
+ */
 //MITASK
 //M-TASK✅
 
