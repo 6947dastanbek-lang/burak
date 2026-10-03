@@ -32,7 +32,7 @@ Rest API => SPA => REACT (USER'S application)
 // }
 
 // console.log(getSquareNumbers([1, 2, 3]));
-//MITASK
+
 //N-TASK✅
 // function palindromCheck(word: string): boolean {
 //     const reversedWord = word.split("").reverse().join("");
@@ -43,7 +43,7 @@ Rest API => SPA => REACT (USER'S application)
 // console.log(palindromCheck("dad"));
 // console.log(palindromCheck("son"));
 // console.log(palindromCheck("level"));
-//MITASK
+
 //O-TASK✅
 // function calculateSumOfNumbers(arr: unknown[]): number {
 //     // unknown[] → array ichida har xil type bo‘lishi mumkin
@@ -63,10 +63,18 @@ Rest API => SPA => REACT (USER'S application)
 // }
 
 // console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
-//MITASk
 //P-TASK ✅
-function objectToArray(obj: object): any[][] {
-    return Object.entries(obj);
+// function objectToArray(obj: object): any[][] {
+//     return Object.entries(obj);
+// }
+
+// console.log(objectToArray({ a: 10, b: 20 }));
+
+//Q-TASK ✅
+function hasProperty(obj: object, property: string): boolean {
+    return property in obj;
 }
 
-console.log(objectToArray({ a: 10, b: 20 }));
+console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
+
+console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false

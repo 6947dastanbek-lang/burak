@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 // mongoose → MongoDB bilan ishlash uchun library
 
 import app from "./app";
+import { info } from "console";
 // ./app → app.ts faylidan app obyektini olib keladi
 
 //TCP // Schema
@@ -25,7 +26,8 @@ mongoose
             // PORT → server qaysi portda ishlashini bildiradi
             // function() → server ishga tushgandan keyin bajariladi
 
-            console.log(`The server is running successfully on port: ${PORT}`);
+            console.info(`The server is running successfully on port: ${PORT}`);
+            console.info(`Admin project on http://localhost:${PORT}/admin \n`);
         });
     })
 
