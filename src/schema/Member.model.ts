@@ -29,8 +29,6 @@ const memberSchema = new Schema(
         memberPhone: {
             type: String,
             index: { unique: true, sparse: true },
-            // unique → bir xil telefon raqami takrorlanmaydi
-            // sparse → qiymat bo‘lmagan documentlar unique tekshiruviga kiritilmaydi
             required: true,
         },
         memberPassword: {

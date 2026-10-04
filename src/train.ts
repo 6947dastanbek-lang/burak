@@ -70,11 +70,22 @@ Rest API => SPA => REACT (USER'S application)
 
 // console.log(objectToArray({ a: 10, b: 20 }));
 
-//Q-TASK ✅
-function hasProperty(obj: object, property: string): boolean {
-    return property in obj;
+// //Q-TASK ✅
+// function hasProperty(obj: object, property: string): boolean {
+//     return property in obj;
+// }
+
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
+
+// console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false
+
+//R-TASK ✅
+function calculate(str: string): number {
+    return str
+        .split("+") //boledi
+        .map(Number) // nomer qiladi
+        .reduce((son1, son2) => son1 + son2); //
 }
 
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
-
-console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false
+console.log(calculate("10+9"));
+console.log(calculate("90+7"));
