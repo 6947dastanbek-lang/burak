@@ -23,6 +23,8 @@ routerAdmin
     .get("/signup", restaurantController.getSignup)
     .post("/signup", restaurantController.processSignup);
 // GET "/signup" → restaurantController.getSignup ishlaydi
+routerAdmin.get("/logout", restaurantController.logout);
+routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
 export default routerAdmin;
 // routerAdmin'ni boshqa faylda ishlatish uchun export qilamiz

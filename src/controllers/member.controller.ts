@@ -37,11 +37,12 @@ memberController.login = async (req: Request, res: Response) => {
 
         // TODO: Tokens authentication🛑
 
-        res.json({ member: result });
+        res.json({ member: result }); // member basqada at penen qoysa boladi
     } catch (err) {
         console.log("Error, login:", err);
 
-        if (err instanceof Errors) res.status(err.code).json(err);
+        if (err instanceof Errors)
+            res.status(err.code).json(err); //
         else res.status(Errors.standard.code).json(Errors.standard);
     }
 };
