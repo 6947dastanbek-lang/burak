@@ -11,7 +11,7 @@ import { MORGAN_FORMAT } from "./libs/config";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 
-const MongoDBStore = ConnectMongoDB(session);
+const MongoDBStore = ConnectMongoDB(session); // joqarida ekewinen obj alamiz
 
 const store = new MongoDBStore({
     uri: String(process.env.MONGO_URL),
@@ -32,7 +32,7 @@ app.use(
             maxAge: 1000 * 3600 * 6, //6 hrs
         },
         store: store,
-        resave: true,
+        resave: true, //auth bolganda qayta waqit qoyadi false birinshi auth esaplay beredi
         saveUninitialized: true,
     }),
 );
