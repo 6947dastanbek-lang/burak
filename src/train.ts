@@ -80,180 +80,25 @@ Rest API => SPA => REACT (USER'S application)
 // console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false
 
 //R-TASK ✅
-function calculate(str: string): number {
-    return str
-        .split("+") //boledi
-        .map(Number) // nomer qiladi
-        .reduce((son1, son2) => son1 + son2); //
+// function calculate(str: string): number {
+//     return str
+//         .split("+") //boledi
+//         .map(Number) // nomer qiladi
+//         .reduce((son1, son2) => son1 + son2); //
+// }
+
+// console.log(calculate("10+9"));
+// console.log(calculate("90+7"));
+
+//S -TASK ✅
+function missingNumber(arr: number[]): number {
+    const n = arr.length;
+
+    const e = (n * (n + 1)) / 2;
+
+    const b = arr.reduce((sum, num) => sum + num, 0);
+
+    return e - b;
 }
 
-console.log(calculate("10+9"));
-console.log(calculate("90+7"));
-/*
-app.ts⬇️
-import session from "express-session";
-import ConnectMongoDB from "connect-mongodb-session";
-const MongoDBStore = ConnectMongoDB(session);
-
-const store = new MongoDBStore({
-    uri: String(process.env.MONGO_URL),
-    collection: "sessions",
-});
-app.use(
-    session({
-        secret: String(process.env.SESSION_SECRET),
-        cookie: {
-            maxAge: 1000 * 3600 * 6, //6 hrs
-        },
-        store: store,
-        resave: true,
-        saveUninitialized: true,
-    }),
-); */
-/*
-restaurant-controller.ts ⬇️
-
-restaurantController.goHome = (req: Request, res: Response) => {
-    // goHome → /admin sahifasi uchun controller
-
-    try {
-        console.log("goHome");
-
-        res.render("home");
-        // browserga "Home Page" yuboramiz
-    } catch (err) {
-        console.log("Error, goHome:", err);
-        // xato bo'lsa terminalga chiqaramiz
-        res.redirect("/admin");
-    }
-};
-
-restaurantController.getSignup = (req: Request, res: Response) => {
-    // getSignup → /admin/signup sahifasi
-
-    try {
-        console.log("getSignup");
-
-        res.render("signup");
-        // browserga Signup Page yuboramiz
-    } catch (err) {
-        console.log("Error, getSignup:", err);
-        res.redirect("/admin");
-    }
-};
-restaurantController.getLogin = (req: Request, res: Response) => {
-    // getLogin → /admin/login sahifasi
-
-    try {
-        console.log("getLogin");
-
-        res.render("login");
-        // browserga Login Page yuboramiz
-    } catch (err) {
-        console.log("Error, getLogin:", err);
-        res.redirect("/admin");
-    }
-};
-restaurantController.processSignup = async (
-    req: AdminRequest,
-    res: Response,
-) => {
-    // processSignup → signup formdan kelgan POST requestni ishlaydi
-
-    try {
-        console.log("processSignup");
-        // terminalga processSignup ishlaganini chiqaramiz
-
-        console.log("body:", req.body);
-        // req.body → Postman/form orqali kelgan ma'lumotlar
-
-        const newMember: MemberInput = req.body;
-        // req.body'dagi ma'lumotlarni newMember'ga olamiz
-        // MemberInput → ma'lumotlarning TypeScript structure'i
-        newMember.memberType = MemberType.RESTAURANT;
-        // signup qilayotgan memberning turini RESTAURANT qilib belgilaymiz
-        newMember.memberStatus = MemberStatus.ACTIVE;
-        // yangi memberning statusini ACTIVE qilib belgilaymiz
-        const memberService = new MemberService();
-        // MemberService objectini yaratamiz
-        // database bilan ishlashni Service'ga topshiramiz
-
-        const result = await memberService.processSignup(newMember);
-        // Service'MODELga newMember yuboramiz
-        // Service MongoDB'ga yangi member yaratadi
-        // result → database'dan qaytgan yangi member
-
-        // TODO:SESSIONS AUTHENTICATION🛑
-        req.session.member = result;
-        req.session.save(function () {
-            res.send(result);
-        });
-
-        // result'ni client/Postman'ga qaytaramiz
-    } catch (err) {
-        console.log("Error, processSignup:", err);
-        // signup vaqtida xato chiqsa terminalga chiqaramiz
-        const message =
-            err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-        res.send(
-            `<script>alert ("${message}"); window.location.replacee('admin/signup')</script>`,
-        );
-    }
-};
-restaurantController.processLogin = async (
-    req: AdminRequest,
-    res: Response,
-) => {
-    try {
-        console.log("body:", req.body);
-
-        const input: LoginInput = req.body;
-
-        const memberService = new MemberService();
-
-        const result = await memberService.processLogin(input);
-        // TODO:SESSIONS AUTHENTICATION 🛑
-        req.session.member = result;
-        req.session.save(function () {
-            res.send(result);
-        });
-    } catch (err) {
-        console.log("Error, processLogin:", err);
-        const message =
-            err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-        res.send(
-            `<script>alert ("${message}"); window.location.replacee('admin/login')</script>`,
-        );
-    }
-};
-restaurantController.logout = async (req: AdminRequest, res: Response) => {
-    try {
-        console.log("logout");
-        req.session.destroy(function () {
-            res.redirect("/admin"); //sent | redirect | json |render
-        });
-    } catch (err) {
-        console.log("Error, logout:", err);
-        res.redirect("/admin");
-    }
-};
-restaurantController.checkAuthSession = async (
-    req: AdminRequest,
-    res: Response,
-) => {
-    try {
-        console.log("checkAuthSession");
-        if (req.session?.member)
-            res.send(
-                `<script>alert ("${req.session.member.memberNick}")</script>`,
-            );
-        else
-            res.send(`<script>alert ("${Message.NOT_AUTHENTICATED}")</script>`);
-    } catch (err) {
-        console.log("Error, checkAuthSession:", err);
-        res.send(err);
-    }
-};*/
-/*
-
-*/
+console.log(missingNumber([3, 0, 1])); // 2
