@@ -10,7 +10,7 @@ import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 // MemberType → member qanday turdagi user ekanini bildiradi
 
 import MemberService from "../models/Member.service";
-import Errors, { Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 // MemberService → signup bilan bog'liq database/business logic shu yerda
 const memberService = new MemberService();
 const restaurantController: T = {};
@@ -63,9 +63,15 @@ restaurantController.processSignup = async (
 ) => {
     try {
         console.log("processSignup");
-        console.log("body:", req.body);
+        const file = req.file;
+        if (!file)
+            throw new Errors(
+                HttpCode.BAD_REQUEST,
+                Message.SOMETHING_WENT_WRONG,
+            );
         const newMember: MemberInput = req.body;
         // MemberInput → ma'lumotlarning TypeScript structure'i
+        newMember.memberImage = file?.path;
         newMember.memberType = MemberType.RESTAURANT;
         // signup qilayotgan memberning turini RESTAURANT qilib belgilaymiz
 
@@ -78,7 +84,7 @@ restaurantController.processSignup = async (
         // result → database'dan qaytgan yangi member
         req.session.member = result;
         req.session.save(function () {
-            res.send(result);
+            res.redirect("/admin/product/all");
         });
 
         // result'ni client/Postman'ga qaytaramiz
@@ -104,7 +110,7 @@ restaurantController.processLogin = async (
         const result = await memberService.processLogin(input);
         req.session.member = result;
         req.session.save(function () {
-            res.send(result);
+            res.redirect("/admin/product/all");
         });
     } catch (err) {
         console.log("Error, processLogin:", err);
