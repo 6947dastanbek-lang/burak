@@ -91,14 +91,21 @@ Rest API => SPA => REACT (USER'S application)
 // console.log(calculate("90+7"));
 
 //S -TASK ✅
-function missingNumber(arr: number[]): number {
-    const n = arr.length;
+// function missingNumber(arr: number[]): number {
+//     const n = arr.length;
 
-    const e = (n * (n + 1)) / 2;
+//     const e = (n * (n + 1)) / 2;
 
-    const b = arr.reduce((sum, num) => sum + num, 0);
+//     const b = arr.reduce((sum, num) => sum + num, 0);
 
-    return e - b;
+//     return e - b;
+// }
+
+// console.log(missingNumber([3, 0, 1])); // 2
+//T-TASK ✅
+function mergeSortedArrays(array1: number[], array2: number[]): number[] {
+    const toliqlash = [...array1, ...array2];
+    const tartip = toliqlash.sort((a, b) => a - b);
+    return tartip;
 }
-
-console.log(missingNumber([3, 0, 1])); // 2
+console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])); // [0, 3, 4, 4, 6, 30, 31]
