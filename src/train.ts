@@ -103,9 +103,19 @@ Rest API => SPA => REACT (USER'S application)
 
 // console.log(missingNumber([3, 0, 1])); // 2
 //T-TASK ✅
-function mergeSortedArrays(array1: number[], array2: number[]): number[] {
-    const toliqlash = [...array1, ...array2];
-    const tartip = toliqlash.sort((a, b) => a - b);
-    return tartip;
+// function mergeSortedArrays(array1: number[], array2: number[]): number[] {
+//     const toliqlash = [...array1, ...array2];
+//     const tartip = toliqlash.sort((a, b) => a - b);
+//     return tartip;
+// }
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])); // [0, 3, 4, 4, 6, 30, 31]
+//U-TASK ✅
+function sumOdds(num: number): number {
+    let count = 0; // Toq sonlar sonini hisoblaymiz
+    for (let i = 1; i <= num; i += 2) {
+        count++; // Har bir toq son topilganda bittaga oshiramiz
+    }
+    return count; // Toq sonlar umumiy sonini qaytaramiz
 }
-console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])); // [0, 3, 4, 4, 6, 30, 31]
+console.log(sumOdds(9)); // 4
+console.log(sumOdds(11)); // 5
