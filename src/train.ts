@@ -1,19 +1,37 @@
 /*
- * Project Standards
- *
- * - Logging standards => har methoddi log qiliw
- * - Naming standards
- *      function, method, variable → CAMEL =>getLogin
- *      class → PASCAL => MemberService
- *      folder → KEBAB => member-controller
- *      css → SNAKE =>
- * - Error handling =>
- */
-/*
-Traditional API => BSSR  (ADMIN)=> EJS
-Rest API => SPA => REACT (USER'S application)
- GrapQL API =>
- */
+Project Standards:
+    - Logging standards
+    - Naming standards:
+        function, method, variable => CAMEL
+        class => PASCAL
+        folder, file => KEBAB
+        css => SNAKE
+    - Error handling
+*/
+
+/* Request:
+    - Traditional Api (form POST )
+    - Rest Api
+    - GraphQL Api
+    ...
+*/
+
+/* Frontend Development:
+    Traditional FD    => SSR => EJS
+    Modern FD         => SPA => REACT
+*/
+
+/* Cookies:
+    request join
+    self destroy
+*/
+
+/* Validation:
+    Frontend validation
+    Backend validation
+    Database validation
+*/
+
 //MITASK
 //M-TASK✅
 
@@ -110,12 +128,14 @@ Rest API => SPA => REACT (USER'S application)
 // }
 // console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30])); // [0, 3, 4, 4, 6, 30, 31]
 //U-TASK ✅
-function sumOdds(num: number): number {
-    let count = 0; // Toq sonlar sonini hisoblaymiz
-    for (let i = 1; i <= num; i += 2) {
-        count++; // Har bir toq son topilganda bittaga oshiramiz
-    }
-    return count; // Toq sonlar umumiy sonini qaytaramiz
-}
-console.log(sumOdds(9)); // 4
-console.log(sumOdds(11)); // 5
+// function sumOdds(num: number): number {
+//     let count = 0; // Toq sonlar sonini hisoblaymiz
+//     for (let i = 1; i <= num; i += 2) {
+//         count++; // Har bir toq son topilganda bittaga oshiramiz
+//     }
+//     return count; // Toq sonlar umumiy sonini qaytaramiz
+// }
+// console.log(sumOdds(9)); // 4
+// console.log(sumOdds(11)); // 5
+//
+//V-TASK ✅

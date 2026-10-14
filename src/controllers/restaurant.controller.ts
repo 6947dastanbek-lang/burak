@@ -11,6 +11,7 @@ import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 
 import MemberService from "../models/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Errors";
+import { log } from "console";
 // MemberService → signup bilan bog'liq database/business logic shu yerda
 const memberService = new MemberService();
 const restaurantController: T = {};
@@ -94,7 +95,7 @@ restaurantController.processSignup = async (
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
-            `<script>alert ("${message}"); window.location.replacee('admin/signup')</script>`,
+            `<script>alert ("${message}"); window.location.replacee('/admin/signup')</script>`,
         );
     }
 };
@@ -103,10 +104,9 @@ restaurantController.processLogin = async (
     res: Response,
 ) => {
     try {
+        console.log("processLogin");
         console.log("body:", req.body);
-
         const input: LoginInput = req.body;
-
         const result = await memberService.processLogin(input);
         req.session.member = result;
         req.session.save(function () {
@@ -117,7 +117,7 @@ restaurantController.processLogin = async (
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
-            `<script>alert ("${message}"); window.location.replacee('admin/login')</script>`,
+            `<script>alert ("${message}"); window.location.replace('/admin/login')</script>`,
         );
     }
 };
