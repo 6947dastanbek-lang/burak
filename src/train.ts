@@ -139,3 +139,18 @@ Project Standards:
 // console.log(sumOdds(11)); // 5
 //
 //V-TASK ✅
+function countChars(str: string): { [key: string]: number } {
+    const result: { [key: string]: number } = {};
+
+    for (const char of str) {
+        if (result[char]) {
+            result[char]++;
+        } else {
+            result[char] = 1;
+        }
+    }
+
+    return result;
+}
+
+console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
