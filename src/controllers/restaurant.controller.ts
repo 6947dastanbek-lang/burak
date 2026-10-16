@@ -3,63 +3,43 @@ import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
 
 import { MemberInput, LoginInput, AdminRequest } from "../libs/types/member";
-// MemberInput → signup paytida keladigan member ma'lumotlari
-
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
-// MemberStatus → memberning holati (ACTIVE, ...)
-// MemberType → member qanday turdagi user ekanini bildiradi
-
 import MemberService from "../models/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { log } from "console";
-// MemberService → signup bilan bog'liq database/business logic shu yerda
 const memberService = new MemberService();
 const restaurantController: T = {};
-// restaurantController → Restaurant/Admin uchun controller object
 
 restaurantController.goHome = (req: Request, res: Response) => {
-    // goHome → /admin sahifasi uchun controller
-
     try {
         console.log("goHome");
-
         res.render("home");
-        // browserga "Home Page" yuboramiz
     } catch (err) {
         console.log("Error, goHome:", err);
-        // xato bo'lsa terminalga chiqaramiz
         res.redirect("/admin");
     }
 };
 
 restaurantController.getSignup = (req: Request, res: Response) => {
-    // getSignup → /admin/signup sahifasi
-
     try {
         console.log("getSignup");
-
         res.render("signup");
-        // browserga Signup Page yuboramiz
     } catch (err) {
         console.log("Error, getSignup:", err);
         res.redirect("/admin");
     }
 };
 restaurantController.getLogin = (req: Request, res: Response) => {
-    // getLogin → /admin/login sahifasi
-
     try {
         console.log("getLogin");
-
         res.render("login");
-        // browserga Login Page yuboramiz
     } catch (err) {
         console.log("Error, getLogin:", err);
         res.redirect("/admin");
     }
 };
 restaurantController.processSignup = async (
-    req: AdminRequest, //member.ts interface qildiq
+    req: AdminRequest,
     res: Response,
 ) => {
     try {
@@ -71,27 +51,16 @@ restaurantController.processSignup = async (
                 Message.SOMETHING_WENT_WRONG,
             );
         const newMember: MemberInput = req.body;
-        // MemberInput → ma'lumotlarning TypeScript structure'i
         newMember.memberImage = file?.path;
         newMember.memberType = MemberType.RESTAURANT;
         // signup qilayotgan memberning turini RESTAURANT qilib belgilaymiz
-
-        // MemberService objectini yaratamiz
-        // database bilan ishlashni Service'ga topshiramiz
-
         const result = await memberService.processSignup(newMember);
-        // Service'MODELga newMember yuboramiz
-        // Service MongoDB'ga yangi member yaratadi
-        // result → database'dan qaytgan yangi member
         req.session.member = result;
         req.session.save(function () {
             res.redirect("/admin/product/all");
         });
-
-        // result'ni client/Postman'ga qaytaramiz
     } catch (err) {
         console.log("Error, processSignup:", err);
-        // signup vaqtida xato chiqsa terminalga chiqaramiz
         const message =
             err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
         res.send(
