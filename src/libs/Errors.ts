@@ -22,6 +22,7 @@ export enum Message {
     // ma'lumot topilmadi
     USED_NICK_PHONE = "You are inserting already used nick or phone!",
     NO_MEMBER_NICK = "No member with that member nick",
+    BLOCKED_USER = "You have been blocked, contact restaureant!",
     WRONG_PASSWORD = "Wrong password, please try again!",
     CREATE_FAILED = "Create is failed!",
     UPDATE_FAILED = "Update is failed!",
