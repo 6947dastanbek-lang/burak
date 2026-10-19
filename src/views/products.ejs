@@ -20,7 +20,6 @@
         </li>
       </ul>
     </div>
-
     <div class="restaurant-menu-frame">
       <div class="board">
         <div class="dishes-table">
@@ -65,7 +64,7 @@
             </button>
           </div>
         </div>
-        <form onsubmit="return validateSignupForm()" action="/admin/product/create" method="POST" class="dish-container" enctype="multipart/form-data">
+        <form onsubmit="return validateForm()" action="/admin/product/create" method="POST" class="dish-container" enctype="multipart/form-data">
           <div class="long-input" style="display: flex; align-items: center">
             <span class="new-dish-txt">NEW PRODUCT DETAIL</span>
           </div>
@@ -97,7 +96,6 @@
                 <option value="OTHER">Other</option>
               </select>
             </div>
-
             <div class="half-input" id="product-collection">
               <label>Dish Volume</label>
               <select class="product-size" name="productSize">
@@ -107,12 +105,12 @@
                 <option value="SET">Set</option>
               </select>
             </div>
-
             <div class="half-input" id="product-volume" style="display: none">
               <label>Drink Volume</label>
               <select class="product-volume" name="productVolume">
                 <option value="0.5">0,5 liters</option>
                 <option value="1" selected>1 liters</option>
+                <!--hide show bolganda    -->
                 <option value="1.2">1,2 liters</option>
                 <option value="1.5">1,5 liters</option>
                 <option value="2">2 liters</option>
@@ -123,7 +121,6 @@
             <label>Product Description</label>
             <textarea name="productDesc" class="product-desc"></textarea>
           </div>
-
           <div class="img-frame">
             <label>Product Images</label>
             <div class="media-frame">
@@ -147,7 +144,7 @@
                 <img src="/img/upload.svg" class="5" id="image-section-5" />
                 <input type="file" id="file" name="productImages" class="image-five" onchange="previewFileHandler(this,5)" />
               </div>
-              <input name="restaurantIid" class="restaurant-id" hidden />
+              <input name="restaurantId" class="restaurant-id" hidden />
             </div>
           </div>
           <div class="operation-buttons">
@@ -164,5 +161,4 @@
   </div>
   <script type="text/javascript" src="/js/products.js"></script>
 </body>
-
 <%- include('includes/footer') %>

@@ -61,6 +61,7 @@ function validateForm() {
         return false;
     } else return true;
 }
+
 function previewFileHandler(input, order) {
     const imgClassName = input.className;
     console.log("input:", input);

@@ -13,7 +13,6 @@ function fitElementToParent(el, padding) {
             ratio = parentOffsetWidth / elOffsetWidth,
             timeout = setTimeout(anime.set(el, { scale: ratio }), 10);
     }
-
     resize();
     window.addEventListener("resize", resize);
 }
@@ -23,7 +22,6 @@ function fitElementToParent(el, padding) {
         spherePathEls = sphereEl.querySelectorAll(".sphere path"),
         pathLength = spherePathEls.length,
         animations = [];
-
     fitElementToParent(sphereEl);
 
     const breathAnimation = anime({

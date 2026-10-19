@@ -139,18 +139,27 @@ Project Standards:
 // console.log(sumOdds(11)); // 5
 //
 //V-TASK ✅
-function countChars(str: string): { [key: string]: number } {
-    const result: { [key: string]: number } = {};
+// function countChars(str: string): { [key: string]: number } {
+//     const result: { [key: string]: number } = {};
 
-    for (const char of str) {
-        if (result[char]) {
-            result[char]++;
-        } else {
-            result[char] = 1;
-        }
+//     for (const char of str) {
+//         if (result[char]) {
+//             result[char]++;
+//         } else {
+//             result[char] = 1;
+//         }
+//     }
+
+//     return result;
+// }
+
+// console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
+// W-TASK
+function chunkArray(array: number[], number: number): number[][] {
+    const result: number[][] = [];
+    for (let i = 0; i < array.length; i += number) {
+        result.push(array.slice(i, i + number));
     }
-
     return result;
 }
-
-console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
