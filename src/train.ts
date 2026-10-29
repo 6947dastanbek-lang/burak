@@ -155,11 +155,42 @@ Project Standards:
 
 // console.log(countChars("hello")); // { h: 1, e: 1, l: 2, o: 1 }
 // W-TASK
-function chunkArray(array: number[], number: number): number[][] {
-    const result: number[][] = [];
-    for (let i = 0; i < array.length; i += number) {
-        result.push(array.slice(i, i + number));
+// function chunkArray(array: number[], number: number): number[][] {
+//     const result: number[][] = [];
+//     for (let i = 0; i < array.length; i += number) {
+//         result.push(array.slice(i, i + number));
+//     }
+//     return result;
+// }
+// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+//X-TASK
+function countOccurrences(obj: object, str: string): number {
+    let count = 0;
+
+    for (const key in obj) {
+        // Object ichidagi keylarni aylanadi
+        if (key === str) {
+            count++;
+        }
+        const value = obj[key as keyof typeof obj]; // Keyning qiymatini oladi
+        if (typeof value === "object" && value !== null) {
+            // Qiymat nested object bo'lsa, ichiga kirib sanaydi
+            count += countOccurrences(value, str);
+        }
     }
-    return result;
+
+    return count;
 }
-console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+
+console.log(
+    countOccurrences(
+        {
+            model: "Bugatti",
+            steer: {
+                model: "HANKOOK",
+                size: 30,
+            },
+        },
+        "model",
+    ),
+);

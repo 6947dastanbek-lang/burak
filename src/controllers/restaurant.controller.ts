@@ -2,7 +2,12 @@ import { NextFunction, Request, Response } from "express";
 
 import { T } from "../libs/types/common";
 
-import { MemberInput, LoginInput, AdminRequest } from "../libs/types/member";
+import {
+    MemberInput,
+    LoginInput,
+    AdminRequest,
+    Member,
+} from "../libs/types/member";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import MemberService from "../models/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Errors";
@@ -104,7 +109,7 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
 restaurantController.getUsers = async (req: Request, res: Response) => {
     try {
         console.log("getUsers");
-        const result = await memberService.getUsers();
+        const result: Member[] = await memberService.getUsers();
         res.render("users", { users: result });
     } catch (err) {
         console.log("Error, getUsers:", err);
