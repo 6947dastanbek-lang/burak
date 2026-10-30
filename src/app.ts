@@ -5,14 +5,14 @@ import routerAdmin from "./router-admin";
 import router from "./router";
 import morgan from "morgan";
 // morgan → serverga kelayotgan requestlarni terminalda ko‘rsatadi
-
+import cookieParser from "cookie-parser";
 import { MORGAN_FORMAT } from "./libs/config";
 // MORGAN_FORMAT → Morgan qanday formatda log chiqarishini belgilaydi
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
-const MongoDBStore = ConnectMongoDB(session); // joqarida ekewinen obj alamiz
 
+const MongoDBStore = ConnectMongoDB(session); // joqarida ekewinen obj alamiz
 const store = new MongoDBStore({
     uri: String(process.env.MONGO_URL),
     collection: "sessions",
@@ -22,6 +22,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 /** 2-SESSIONS **/
 app.use(
