@@ -4,6 +4,7 @@ const router = express.Router();
 // express.Router() → yangi Router yaratadi
 // router → URL'larni controller'lar bilan bog‘lash uchun ishlatiladi
 import memberController from "./controllers/member.controller";
+import uploader from "./libs/utils/uploader";
 
 /**MEMBER**/
 
@@ -18,6 +19,12 @@ router.get(
     "/member/detail",
     memberController.verifyAuth,
     memberController.getMemberDetail,
+);
+router.post(
+    "/member/update",
+    memberController.verifyAuth,
+    uploader("members").single("memberImage"),
+    memberController.updateMember,
 );
 /**PRODUCT**/
 /**ORDER**/
