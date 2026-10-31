@@ -5,9 +5,20 @@ const router = express.Router();
 // router → URL'larni controller'lar bilan bog‘lash uchun ishlatiladi
 import memberController from "./controllers/member.controller";
 
-// *MEMBER*
+/**MEMBER**/
 
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
-router.get("/member/detail", memberController.verifyAuth);
+router.post(
+    "/member/logout",
+    memberController.verifyAuth,
+    memberController.logout,
+);
+router.get(
+    "/member/detail",
+    memberController.verifyAuth,
+    memberController.getMemberDetail,
+);
+/**PRODUCT**/
+/**ORDER**/
 export default router;
