@@ -3,8 +3,9 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/Product.service";
 import { log } from "console";
-import { ProductInput } from "../libs/types/product";
+import { ProductInput, ProductInquiry } from "../libs/types/product";
 import { AdminRequest } from "../libs/types/member";
+import { ProductCollection } from "../libs/enums/product.enum";
 
 const productService = new ProductService();
 const productController: T = {};
@@ -12,9 +13,17 @@ const productController: T = {};
 productController.getProducts = async (req: Request, res: Response) => {
     try {
         console.log("getProducts");
-        const query = req.query;
-        console.log("Query:", query);
-        res.status(HttpCode.OK).json({ result: "DONE" });
+        const { page, limit, order, productCollection, search } = req.query;
+        const inquiry: ProductInquiry = {
+            order: String(order),
+            page: Number(page),
+            limit: Number(limit),
+        };
+        if (productCollection)
+            inquiry.productCollection = productCollection as ProductCollection;
+        if (search) inquiry.search = String(search);
+        const result = await productService.getProducts(inquiry);
+        res.status(HttpCode.OK).json(result);
     } catch (err) {
         console.log("Error, getProducts:", err);
         if (err instanceof Errors) res.status(err.code).json(err);
