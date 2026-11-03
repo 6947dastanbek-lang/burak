@@ -9,6 +9,18 @@ import { AdminRequest } from "../libs/types/member";
 const productService = new ProductService();
 const productController: T = {};
 /** SPA  ⬇️ **/
+productController.getProducts = async (req: Request, res: Response) => {
+    try {
+        console.log("getProducts");
+        const query = req.query;
+        console.log("Query:", query);
+        res.status(HttpCode.OK).json({ result: "DONE" });
+    } catch (err) {
+        console.log("Error, getProducts:", err);
+        if (err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standard.code).json(Errors.standard);
+    }
+};
 /** SSR ⬇️ **/
 productController.getAllProducts = async (req: Request, res: Response) => {
     try {

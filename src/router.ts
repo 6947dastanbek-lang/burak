@@ -5,9 +5,10 @@ const router = express.Router();
 // router → URL'larni controller'lar bilan bog‘lash uchun ishlatiladi
 import memberController from "./controllers/member.controller";
 import uploader from "./libs/utils/uploader";
+import productController from "./controllers/product.controller";
 /**MEMBER**/
 
-router.get("/member/restourant", memberController.getRestaurant);
+router.get("/member/restaurant", memberController.getRestaurant);
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
 router.post(
@@ -28,5 +29,6 @@ router.post(
 );
 router.get("/member/top-users", memberController.getTopUsers);
 /**PRODUCT**/
+router.get("/product/all", productController.getProducts);
 /**ORDER**/
 export default router;
