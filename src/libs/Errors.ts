@@ -28,6 +28,7 @@ export enum Message {
     CREATE_FAILED = "Create is failed!",
     UPDATE_FAILED = "Update is failed!",
     NOT_AUTHENTICATED = "You are not authenticated,Please login first",
+    BAD_REQUEST = "BAD_REQUEST",
 }
 class Errors extends Error {
     // Errors → o‘zimiz yaratgan custom error class
