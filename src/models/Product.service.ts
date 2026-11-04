@@ -10,11 +10,15 @@ import {
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import { ObjectId } from "mongoose";
+import ViewService from "./View.service";
+import { ViewInput, View } from "../libs/types/view";
+import { ViewGroup } from "../libs/enums/view.enum";
 class ProductService {
     private readonly productModel;
-
+    public viewService;
     constructor() {
         this.productModel = ProductModel;
+        this.viewService = new ViewService();
     }
     /** SPA  ⬇️ **/
     public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
@@ -22,7 +26,8 @@ class ProductService {
 
         if (inquiry.productCollection)
             match.productCollection = inquiry.productCollection;
-
+        if (inquiry.search)
+            match.productName = { $regex: new RegExp(inquiry.search, "i") };
         const sort: T =
             inquiry.order === "productPrice"
                 ? { [inquiry.order]: 1 }
@@ -39,7 +44,6 @@ class ProductService {
 
         if (!result)
             throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-        //TO DO If authenticated users => first => view log creation
 
         return result;
     }
@@ -58,6 +62,32 @@ class ProductService {
 
         if (!result)
             throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+        //only authenticated member
+        if (memberId) {
+            // Check Existence
+            const input: ViewInput = {
+                memberId: memberId,
+                viewRefId: productId,
+                viewGroup: ViewGroup.PRODUCT,
+            };
+            const existView = await this.viewService.checkViewExistence(input);
+
+            console.log("existView:", existView);
+            if (!existView) {
+                // Insert View(save to db )
+                console.log("PLANNING TO INSERT NEW VIEW");
+                await this.viewService.insertMemberView(input);
+
+                // Increase Counts
+                result = await this.productModel
+                    .findByIdAndUpdate(
+                        productId,
+                        { $inc: { productViews: +1 } },
+                        { new: true },
+                    )
+                    .exec();
+            }
+        }
 
         return result;
     }
