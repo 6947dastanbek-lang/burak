@@ -64,11 +64,12 @@ class ProductService {
             throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
         //only authenticated member
         if (memberId) {
+            //foydalanuvchining ID'si mavjudligini tekshiradi.
             // Check Existence
             const input: ViewInput = {
                 memberId: memberId,
                 viewRefId: productId,
-                viewGroup: ViewGroup.PRODUCT,
+                viewGroup: ViewGroup.PRODUCT, //like,order qaysi turdagi view
             };
             const existView = await this.viewService.checkViewExistence(input);
 
